@@ -31,8 +31,9 @@ namespace MovieReviewSystem.Controllers
             {
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(response),
-                    expiration = response.ValidTo
+                    token = new JwtSecurityTokenHandler().WriteToken(response.jwtSecurityToken),
+                    expiration = response.jwtSecurityToken.ValidTo,
+                    userId = response.userId
                 });
             }
             else

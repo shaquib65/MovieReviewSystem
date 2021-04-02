@@ -25,7 +25,7 @@ namespace MovieReviewSystem.Services
             _configuration = configuration;
         }
 
-        public JwtSecurityToken Login(LoginModel loginModel)
+        public LoginResponseModel Login(LoginModel loginModel)
         {
             var user = userManager.FindByNameAsync(loginModel.Username).Result;
             if (user != null && userManager.CheckPasswordAsync(user, loginModel.Password).Result)
@@ -53,7 +53,7 @@ namespace MovieReviewSystem.Services
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                return token;
+                return new LoginResponseModel { jwtSecurityToken = token, userId = user.Id };
             }
             return null;
         }

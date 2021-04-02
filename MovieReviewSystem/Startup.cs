@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MovieReviewSystem.Interfaces;
 using MovieReviewSystem.Services;
+using MovieReviewSystem.Models;
 
 namespace MovieReviewSystem
 {
@@ -30,6 +31,7 @@ namespace MovieReviewSystem
 
             // For Entity Framework  
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
+            services.AddDbContext<MovieReviewDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
 
             // For Identity  
             services.AddIdentity<ApplicationIdentityUser, IdentityRole>()
@@ -61,6 +63,8 @@ namespace MovieReviewSystem
 
             // configure DI for application services
             services.AddScoped<IAuthenticateService, AuthenticateService>();
+            services.AddScoped<IMovieService, MovieService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

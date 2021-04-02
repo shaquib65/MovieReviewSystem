@@ -9,7 +9,7 @@ namespace MovieReviewSystem.Interfaces
 {
     public interface IAuthenticateService
     {
-        public JwtSecurityToken Login(LoginModel loginModel);
+        public LoginResponseModel Login(LoginModel loginModel);
         public bool Register(RegistrationModel registrationModel);
         public bool RegisterAdmin(RegistrationModel registrationModel);
     }
