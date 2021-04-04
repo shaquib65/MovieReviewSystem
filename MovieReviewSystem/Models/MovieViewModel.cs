@@ -17,9 +17,10 @@ namespace MovieReviewSystem.Models
         public int Budget { get; set; }
         public string Language { get; set; }
         public string CoverImage { get; set; }
-        public long OverallRating { get; set; }
+        public string TrailerUrl { get; set; }
+        public double OverallRating { get; set; }
         public Review CurrentReview { get; set; }
-        public ICollection<Genre> Genres { get; set; }
-        public ICollection<Review> Reviews { get; set; }
+        public List<int> Genres { get; set; }
+        public List<Review> Reviews { get; set; }
     }
 }

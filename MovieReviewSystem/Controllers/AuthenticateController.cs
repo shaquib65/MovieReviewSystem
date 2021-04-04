@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +32,10 @@ namespace MovieReviewSystem.Controllers
             {
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(response.jwtSecurityToken),
-                    expiration = response.jwtSecurityToken.ValidTo,
-                    userId = response.userId
+                    token = new JwtSecurityTokenHandler().WriteToken(response.token),
+                    expiration = response.token.ValidTo,
+                    id = response.userId,
+                    role = response.role
                 });
             }
             else

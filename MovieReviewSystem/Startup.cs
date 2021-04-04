@@ -27,7 +27,11 @@ namespace MovieReviewSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllers();
+
+            //For Mapper
+            services.AddAutoMapper(typeof(ClassAutoMapperMovie));
 
             // For Entity Framework  
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnStr")));
@@ -64,6 +68,7 @@ namespace MovieReviewSystem
             // configure DI for application services
             services.AddScoped<IAuthenticateService, AuthenticateService>();
             services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IReviewService, ReviewService>();
 
         }
 
@@ -77,8 +82,13 @@ namespace MovieReviewSystem
 
             app.UseAuthentication();
 
+            app.UseCors(builder => builder
+                         .AllowAnyOrigin()
+                         .AllowAnyMethod()
+                         .AllowAnyHeader());
+
             app.UseRouting();
-            
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

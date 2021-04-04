@@ -174,7 +174,6 @@ namespace MovieReviewSystem.Models
 
             modelBuilder.Entity<MovieGenreMapping>(entity =>
             {
-                entity.HasNoKey();
 
                 entity.ToTable("MovieGenreMapping");
             });

@@ -8,9 +8,12 @@ namespace MovieReviewSystem.Interfaces
 {
     public interface IMovieService
     {
-        //public MovieViewModel GetMovieByGenre(int genreId = 0);
+        public List<MovieViewModel> GetMoviesByGenre(int genreId);
         public List<Genre> GetAllGenre();
-        //public MovieViewModel CreateMovie(MovieViewModel model);
+        public MovieViewModel CreateMovie(MovieViewModel model);
+        public MovieViewModel GetMoviesByMovieId(int movieId);
+        public MovieViewModel UpdateMovie(MovieViewModel model);
+        public bool DeleteMovie(int movieId);
 
     }
 }

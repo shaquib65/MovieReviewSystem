@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MovieReviewSystem.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieReviewSystem.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.User)]
     [ApiController]
     [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase

@@ -8,7 +8,8 @@ namespace MovieReviewSystem.Authentication
 {
     public class LoginResponseModel
     {
-        public JwtSecurityToken jwtSecurityToken { get; set; }
+        public JwtSecurityToken token { get; set; }
         public string userId { get; set; }
+        public string role { get; set; }
     }
 }

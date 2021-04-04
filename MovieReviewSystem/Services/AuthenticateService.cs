@@ -53,7 +53,7 @@ namespace MovieReviewSystem.Services
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                     );
 
-                return new LoginResponseModel { jwtSecurityToken = token, userId = user.Id };
+                return new LoginResponseModel { token = token, userId = user.Id, role = userRoles[0] };
             }
             return null;
         }
@@ -96,10 +96,14 @@ namespace MovieReviewSystem.Services
             var result = userManager.CreateAsync(user, registrationModel.Password).Result;
             if (!result.Succeeded)
                 return false;
-            if (! roleManager.RoleExistsAsync(UserRoles.Admin).Result)
-                 roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            if (! roleManager.RoleExistsAsync(UserRoles.User).Result)
-                 roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            if (!roleManager.RoleExistsAsync(UserRoles.Admin).Result)
+            {
+               var role =  roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            }
+            if (!roleManager.RoleExistsAsync(UserRoles.User).Result)
+            {
+               var role =  roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            }
 
             if ( roleManager.RoleExistsAsync(UserRoles.Admin).Result)
             {
