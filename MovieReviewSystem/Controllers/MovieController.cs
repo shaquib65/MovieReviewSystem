@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieReviewSystem.Authentication;
 using MovieReviewSystem.Interfaces;
@@ -20,6 +21,7 @@ namespace MovieReviewSystem.Controllers
             _movieService = movieService;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("getAllGenre")]
         public IActionResult GetAllGenre()
@@ -33,6 +35,7 @@ namespace MovieReviewSystem.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = "Internal Server Error." });
             }
         }
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         [Route("createMovie")]
         public IActionResult CreateMovie(MovieViewModel model)
@@ -74,7 +77,7 @@ namespace MovieReviewSystem.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = "Internal Server Error." });
             }
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         [Route("updateMovie")]
         public IActionResult UpdateMovie(MovieViewModel model)
@@ -88,7 +91,7 @@ namespace MovieReviewSystem.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ResponseModel { Status = "Error", Message = "Internal Server Error." });
             }
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         [Route("deleteMovie/{movieId}")]
         public IActionResult DeleteMovie(int movieId)
