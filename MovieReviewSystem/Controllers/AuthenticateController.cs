@@ -35,7 +35,8 @@ namespace MovieReviewSystem.Controllers
                     token = new JwtSecurityTokenHandler().WriteToken(response.token),
                     expiration = response.token.ValidTo,
                     id = response.userId,
-                    role = response.role
+                    role = response.role,
+                    userName = model.Username
                 });
             }
             else
